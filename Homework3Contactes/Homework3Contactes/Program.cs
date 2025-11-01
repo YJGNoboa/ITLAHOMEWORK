@@ -1,7 +1,7 @@
 ﻿//Yanel Josias Gonzalez Noboa 20250908
 Console.WriteLine("Welcome to my contactes list");
 byte typeOption;
-bool runing = true;
+bool running = true;
 List<int> ids = new List<int>();
 
 Dictionary<int, string> names = new Dictionary<int, string>();
@@ -13,12 +13,12 @@ Dictionary<int, int> ages = new Dictionary<int, int>();
 Dictionary<int, bool> bestFriends = new Dictionary<int, bool>();
 
 
-while (runing)
+while (running)
 {
     Console.WriteLine(@"1. Add Contact | 2. View Contacts | 3. Search Contact | 4. Modify Contact | 5. Delete Contact | 6. Exit");
     
 
-    Console.WriteLine("Digite el número de la opción deseada");
+    Console.WriteLine("Insert the option");
 
     while (true)
     {
@@ -100,7 +100,7 @@ while (runing)
 
             break;
         case 6:
-            runing = false;
+            running = false;
             Console.WriteLine("Press enter for close the program");
             Console.ReadKey();
             
