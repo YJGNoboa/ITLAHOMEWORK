@@ -148,8 +148,6 @@ while (running)
             break;
     }
 }
-
-
 static void AddContact(List<int> ids, Dictionary<int, string> names, Dictionary<int, string> lastnames, Dictionary<int, string> addresses, Dictionary<int, string> telephones, Dictionary<int, string> emails, Dictionary<int, int> ages, Dictionary<int, bool> bestFriends)
 {
     Console.Clear();
