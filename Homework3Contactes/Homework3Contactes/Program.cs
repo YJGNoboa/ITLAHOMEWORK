@@ -253,12 +253,12 @@ static void ModifyContact(Dictionary<int, string> names, Dictionary<int, string>
     { 
         case 1:
             
-                names[id] = ValidationString($"Insert the new name for the id (max characters 16): {id}");
+            names[id] = ValidationString($"Insert the new name for the id {id} (max characters 16): ");
                 
             break;
         case 2:
 
-            lastnames[id] = ValidationString($"Insert the new last name for the id (max characters 16): {id}");
+            lastnames[id] = ValidationString($"Insert the new last name for the id {id} (max characters 16) : ");
                 
             
             break;
