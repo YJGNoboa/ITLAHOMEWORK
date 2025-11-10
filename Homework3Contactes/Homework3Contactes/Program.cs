@@ -3,11 +3,9 @@ using System;
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
 
-Console.WriteLine("Welcome to my contact list");
 byte typeOption;
 bool running = true;
 List<int> ids = new List<int>();
-
 Dictionary<int, string> names = new Dictionary<int, string>();
 Dictionary<int, string> lastnames = new Dictionary<int, string>();
 Dictionary<int, string> addresses = new Dictionary<int, string>();
@@ -21,13 +19,22 @@ Console.WriteLine("Two contacts have been found in your data base");
 Console.WriteLine("\nTwo contacts have been successfully added to your list.");
 Console.WriteLine("You can view them by selecting option 2 from the main menu.\n");
 Console.ResetColor();
-Console.WriteLine("Prees Any key for continue");
+Console.WriteLine("Press Any key for continue");
 Console.ReadKey();
 Console.Clear();
 
+Console.WriteLine("Welcome to my contact list");
+
+bool timeFirst = true;
+
+
 while (running)
-{
-    Console.Clear();
+{    
+    if (!timeFirst)
+    {
+        Console.Clear();
+    }
+    timeFirst = false;
     Console.Write(@"1. Add Contact | ");
     Console.Write(@"2. View Contacts | ");
     Console.Write(@"3. Search Contact | ");
