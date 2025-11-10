@@ -1,8 +1,9 @@
 ﻿//Yanel Josias Gonzalez Noboa 20250908
 using System;
 using System.Net.Mail;
+using System.Runtime.CompilerServices;
 
-Console.WriteLine("Welcome to my contactes list");
+Console.WriteLine("Welcome to my contact list");
 byte typeOption;
 bool running = true;
 List<int> ids = new List<int>();
@@ -16,6 +17,7 @@ Dictionary<int, int> ages = new Dictionary<int, int>();
 Dictionary<int, bool> bestFriends = new Dictionary<int, bool>();
 SavedContact(ids, names, lastnames, addresses, telephones, emails, ages, bestFriends);
 Console.ForegroundColor = ConsoleColor.Green;
+Console.WriteLine("Two contacts have been found in your data base");
 Console.WriteLine("\nTwo contacts have been successfully added to your list.");
 Console.WriteLine("You can view them by selecting option 2 from the main menu.\n");
 Console.ResetColor();
@@ -26,21 +28,11 @@ Console.Clear();
 while (running)
 {
     Console.Clear();
-    Console.ForegroundColor = ConsoleColor.Blue;
     Console.Write(@"1. Add Contact | ");
-    Console.ResetColor();
-    Console.ForegroundColor = ConsoleColor.Magenta;  
     Console.Write(@"2. View Contacts | ");
-    Console.ResetColor();
-    Console.ForegroundColor = ConsoleColor.Yellow;
     Console.Write(@"3. Search Contact | ");
-    Console.ResetColor();
-    Console.ForegroundColor = ConsoleColor.DarkCyan;
     Console.Write(@"4. Modify Contact | ");
-    Console.ResetColor();
-    Console.ForegroundColor = ConsoleColor.DarkBlue;
     Console.Write(@"5. Delete Contact | ");
-    Console.ResetColor();
     Console.ForegroundColor = ConsoleColor.Red;
     Console.Write("6. Exit\n");
     Console.ResetColor();
@@ -182,7 +174,7 @@ static void ShowContacts(List<int> ids, Dictionary<int, string> names, Dictionar
         Console.WriteLine($"Telephone: {telephones[id]}");
         Console.WriteLine($"Email: {emails[id]}");
         Console.WriteLine($"Ages: {ages[id]}");
-        Console.WriteLine($"Best Frieds: {bestFriends[id]}");
+        Console.WriteLine($"Best Friends: {bestFriends[id]}");
     }
 }
 
@@ -217,8 +209,8 @@ static void SearchContact(Dictionary<int, string> names, Dictionary<int, string>
             Console.WriteLine($"Address: {addresses[id]}");
             Console.WriteLine($"Telephone: {telephones[id]}");
             Console.WriteLine($"Email: {emails[id]}");
-            Console.WriteLine($"Ages: {ages[id]}");
-            Console.WriteLine($"Best Frieds: {bestFriends[id]}");
+            Console.WriteLine($"Age: {ages[id]}");
+            Console.WriteLine($"Best Friends: {bestFriends[id]}");
             found = true;
         }
     }
@@ -253,19 +245,19 @@ static void ModifyContact(Dictionary<int, string> names, Dictionary<int, string>
     { 
         case 1:
             
-            names[id] = ValidationString($"Insert the new name for the id {id} (max characters 16): ");
+            names[id] = ValidationString($"Insert the new name for the id ({id}) (max characters 16): ");
                 
             break;
         case 2:
 
-            lastnames[id] = ValidationString($"Insert the new last name for the id {id} (max characters 16) : ");
+            lastnames[id] = ValidationString($"Insert the new last name for the id ({id}) (max characters 16) : ");
                 
             
             break;
         case 3:
             while (true)
             {
-                Console.WriteLine($"Insert the new address for the id: {id}");
+                Console.WriteLine($"Insert the new address for the id ({id}): ");
                 addresses[id] = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(addresses[id]))
                 {
@@ -283,7 +275,7 @@ static void ModifyContact(Dictionary<int, string> names, Dictionary<int, string>
             while (true)
             {
                
-                Console.WriteLine($"Insert the new telephone for the id{id}");
+                Console.WriteLine($"Insert the new telephone for the id ({id})");
                 telephones[id] = Console.ReadLine();
                 if (string.IsNullOrEmpty(telephones[id]))
                 {
@@ -301,7 +293,7 @@ static void ModifyContact(Dictionary<int, string> names, Dictionary<int, string>
         case 5:
 
             while (true) {
-                Console.WriteLine($"Insert the new email for the id{id}");
+                Console.WriteLine($"Insert the new email for the id({id})");
                 try
                 {
                     string tempMail = Console.ReadLine();
@@ -318,7 +310,7 @@ static void ModifyContact(Dictionary<int, string> names, Dictionary<int, string>
             }
             break;
         case 6:
-            Console.WriteLine($"Insert the new age for the id{id}");
+            Console.WriteLine($"Insert the new age for the id ({id})");
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out int age) && age > 0 && age <= 120)
@@ -389,9 +381,13 @@ static void ModifyFullContact(Dictionary<int, string> names, Dictionary<int, str
 static void DeleteContact(List<int> ids, Dictionary<int, string> names, Dictionary<int, string> lastnames, Dictionary<int, string> addresses, Dictionary<int, string> telephones, Dictionary<int, string> emails, Dictionary<int, int> ages, Dictionary<int, bool> bestFriends)
 {
     Console.Clear();
-
+    int id;
     Console.WriteLine("Insert the id of the contact you want to delete");
-    int id = int.Parse(Console.ReadLine());
+    if (!int.TryParse(Console.ReadLine(), out id))
+    {
+        Console.WriteLine("Invalid input");        
+        return;
+    }
     if(!names.ContainsKey(id))
     {
         Console.WriteLine("Contact not found");
@@ -449,11 +445,20 @@ static (string name, string lastname, string address, string phone, string email
         }
     }
     string email;
+
+    
     while (true)
     {
 
         Console.Write("Email: ");
         email = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(email))
+        {
+            Console.WriteLine("This field cannot be empty");
+            continue;
+        }
+        
         try
         {
 
@@ -467,26 +472,36 @@ static (string name, string lastname, string address, string phone, string email
             continue;
         }
     }
-    int age;
-    bool isBestFriend;
-    Console.Write("Age: ");
+    int age = 0;
+
     while (true)
     {
-        if (int.TryParse(Console.ReadLine(), out age) && age > 0 && age <= 120)
+        Console.Write("Age: ");
+        string input = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(input) )
         {
-            Console.Write("Is best friend? (1 = Yes, other = No): ");
-            isBestFriend = Console.ReadLine() == "1";
-            break;            
+             
+            Console.WriteLine("This field cannot be empty");
+            continue;
         }
 
+        if (int.TryParse(input, out int tempAge) && tempAge > 0 && tempAge <= 120)
+        {
+            age = tempAge;
+            break;
+        }
         else
         {
-            Console.WriteLine("Invalid age. Try again:");
-            continue;
+            Console.WriteLine("Invalid age, it should be greater than 0 and min than 120");
         }
     }
 
-        
+
+bool isBestFriend = false;
+    Console.WriteLine("Is best friend? 1.Yes, AnyInput.No");
+    if (Console.ReadLine() == "1") { isBestFriend = true; }
+    Console.ResetColor();
 
     return (name, lastname, address, phone, email, age, isBestFriend);
 }
