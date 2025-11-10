@@ -93,7 +93,7 @@ while (running)
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("Choose modification type:");
                 Console.WriteLine("1. Modify a single field");
-                Console.WriteLine("2. Modify all fields of a contact");
+                Console.WriteLine("2. Modify all fieldds of a contact");
 
                 string choice = Console.ReadLine();
                 if (choice == "1")
@@ -279,7 +279,7 @@ static void ModifyContact(Dictionary<int, string> names, Dictionary<int, string>
                 telephones[id] = Console.ReadLine();
                 if (string.IsNullOrEmpty(telephones[id]))
                 {
-                    Console.WriteLine("this fiel cannot be empty");
+                    Console.WriteLine("this field cannot be empty");
                     continue;
                 }
                 else
@@ -421,7 +421,7 @@ static (string name, string lastname, string address, string phone, string email
         address = Console.ReadLine();
         if (string.IsNullOrEmpty(address))
         {
-            Console.WriteLine("this fiel cannot be empty");
+            Console.WriteLine("this field cannot be empty");
             continue;
         }
         else
@@ -436,7 +436,7 @@ static (string name, string lastname, string address, string phone, string email
         phone = Console.ReadLine();
         if (string.IsNullOrEmpty(phone))
         {
-            Console.WriteLine("this fiel cannot be empty");
+            Console.WriteLine("this field cannot be empty");
             continue;
         }
         else
@@ -455,7 +455,7 @@ static (string name, string lastname, string address, string phone, string email
 
         if (string.IsNullOrEmpty(email))
         {
-            Console.WriteLine("This field cannot be empty");
+            Console.WriteLine("This fieldd cannot be empty");
             continue;
         }
         
@@ -482,7 +482,7 @@ static (string name, string lastname, string address, string phone, string email
         if (string.IsNullOrWhiteSpace(input) )
         {
              
-            Console.WriteLine("This field cannot be empty");
+            Console.WriteLine("This fieldd cannot be empty");
             continue;
         }
 
