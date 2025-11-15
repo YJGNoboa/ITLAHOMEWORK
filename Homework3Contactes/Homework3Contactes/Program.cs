@@ -23,7 +23,7 @@ Console.WriteLine("Press Any key for continue");
 Console.ReadKey();
 Console.Clear();
 
-Console.WriteLine("Welcome to my contact list");
+Console.WriteLine("Welcome to my contact list\n");
 
 bool timeFirst = true;
 
